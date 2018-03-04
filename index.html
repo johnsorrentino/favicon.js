@@ -1,0 +1,49 @@
+<html>
+<head>
+  <script src="./faviconjs.js"></script>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <button id="download">Download</button>
+</body>
+</html>
+
+<script>
+  var canvas = document.getElementById('canvas');
+//  var canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 256;
+  var context = canvas.getContext('2d');
+
+  var width = 256;
+  var height = 256;
+
+  // background
+  context.fillStyle = '#000000';
+  context.fillRect(0, 0, width, height);
+
+  // text
+  context.fillStyle = '#FFFFFF';
+  context.font = '120px Helvetica';
+  context.textBaseline = 'middle';
+  context.textAlign = 'center';
+  var x = (width / 2);
+  var y = (height / 2);
+  context.fillText('JS', x, y);
+
+  var downloadButton = document.getElementById('download');
+  downloadButton.addEventListener('click', function () {
+    var favicon = new FaviconJS(canvas);
+    var uri = favicon.toIco([16, 32, 64, 128]);
+    var link = document.createElement('a');
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    downloadURI(uri, 'favicon.ico');
+  });
+  function downloadURI(uri, name) {
+
+  }
+</script>
