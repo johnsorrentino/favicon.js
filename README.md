@@ -4,7 +4,7 @@ Favicon.js is a lightweight library that allows you to create an ICO formatted f
 
 ## Usage
 
-The favicon.js library takes two parameters: a canvas element and a array of sizes. The canvas element should include the image data that you want your favicon to contain. The list of sizes defines the dimensions of the images that will be included in the generated ICO file.
+The favicon.js library takes two parameters: a canvas element and an array of sizes. The canvas element should include the image data that you want your favicon to contain. The list of sizes defines the dimensions of the images that will be included in the generated ICO file.
 
 ```JavaScript
 const dataurl = faviconjs({
