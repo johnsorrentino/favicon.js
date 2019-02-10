@@ -1,42 +1,30 @@
-function faviconjs(options) {
-  /**
-   * Set defaults.
-   */
-  const defaults = {
-    canvas: document.createElement("canvas"),
-    sizes: [16, 32, 48]
-  };
+import Canvas from "./canvas.js";
 
-  /**
-   * Override defaults with options.
-   */
-  data = Object.assign({}, defaults, options);
-  const canvas = data.canvas;
-  const sizes = data.sizes;
+export default class Ico {
 
-  /**
-   * Generate and return the ICO binary.
-   */
-  return generateIco();
+  constructor(canvas, sizes = [16, 32, 48]) {
+    this.canvas = canvas;
+    this.sizes = sizes;
+  }
 
-  function generateIco() {
-    const canvasMaster = resizeCanvasOptimal(canvas, 128, 128);
-    const iconDirectoryHeader = createIconDirectoryHeader(sizes.length);
+  generate() {
+    const canvasMaster = Canvas.resizeCanvasOptimal(canvas, 128, 128);
+    const iconDirectoryHeader = this.createIconDirectoryHeader(this.sizes.length);
     let iconDirectoryEntries = "";
     let bitmapData = "";
 
-    for (let i = 0; i < sizes.length; i++) {
-      const size = sizes[i];
-      const canvas = resizeCanvasOptimal(canvasMaster, size, size);
+    for (let i = 0; i < this.sizes.length; i++) {
+      const size = this.sizes[i];
+      const canvas = Canvas.resizeCanvasOptimal(canvasMaster, size, size);
       const context = canvas.getContext("2d");
       const width = canvas.width;
       const height = canvas.height;
       const imageData = context.getImageData(0, 0, width, height);
-      const bitmapInfoHeader = createBitmapInfoHeader(width, height);
-      const bitmapImageData = createBitmapImageData(canvas);
+      const bitmapInfoHeader = this.createBitmapInfoHeader(width, height);
+      const bitmapImageData = this.createBitmapImageData(canvas);
       const bitmapSize = bitmapInfoHeader.length + bitmapImageData.length;
-      const bitmapOffset = calculateBitmapOffset(sizes, i);
-      iconDirectoryEntries += createIconDirectoryEntry(
+      const bitmapOffset = this.calculateBitmapOffset(this.sizes, i);
+      iconDirectoryEntries += this.createIconDirectoryEntry(
         width,
         height,
         bitmapSize,
@@ -51,46 +39,9 @@ function faviconjs(options) {
   }
 
   /**
-   * Resize the canvas by halving the width and height. This produces better
-   * sampling and the image quality is generally better.
-   */
-  function resizeCanvasOptimal(canvas, targetWidth, targetHeight) {
-    let currentCanvas = canvas;
-    let currentContext = canvas.getContext("2d");
-    let currentWidth = canvas.width;
-    let currentHeight = canvas.height;
-
-    while (currentWidth / 2 >= targetWidth) {
-      currentWidth = currentWidth / 2;
-      currentHeight = currentHeight / 2;
-      resizedCanvas = resizeCanvas(currentCanvas, currentWidth, currentHeight);
-      currentCanvas = resizedCanvas;
-    }
-
-    if (currentWidth > targetWidth) {
-      resizedCanvas = resizeCanvas(currentCanvas, targetWidth, targetHeight);
-      currentCanvas = resizedCanvas;
-    }
-
-    return currentCanvas;
-  }
-
-  /**
-   * Simple resize of a canvas element.
-   */
-  function resizeCanvas(canvas, targetWidth, targetHeight) {
-    resizedCanvas = document.createElement("canvas");
-    resizedContext = resizedCanvas.getContext("2d");
-    resizedCanvas.width = targetWidth;
-    resizedCanvas.height = targetHeight;
-    resizedContext.drawImage(canvas, 0, 0, targetWidth, targetHeight);
-    return resizedCanvas;
-  }
-
-  /**
    * Calculates the location to the bitmap entry.
    */
-  function calculateBitmapOffset(sizes, entry) {
+  calculateBitmapOffset(sizes, entry) {
     let offset = 6; // icon header size
     offset += 16 * sizes.length; // icon entry header size
 
@@ -99,24 +50,24 @@ function faviconjs(options) {
       const size = sizes[i];
       offset += 40; // bitmap header size
       offset += 4 * size * size; // bitmap data size
-      offset += 2 * size * size / 8; // bitmap mask size
+      offset += (2 * size * size) / 8; // bitmap mask size
     }
     return offset;
   }
 
-  function createBitmapImageData(canvas) {
+  createBitmapImageData(canvas) {
     const ctx = canvas.getContext("2d");
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const bitmapPixelData = new Uint32Array(imageData.data.buffer);
     const bitmapBuffer = bitmapPixelData.reverse().buffer;
-    const bitmapMask = new Uint8Array(canvas.width * canvas.height * 2 / 8);
+    const bitmapMask = new Uint8Array((canvas.width * canvas.height * 2) / 8);
     bitmapMask.fill(0);
-    binary = arrayBufferToBinary(canvasToBitmap(canvas));
-    binary += Uint8ArrayToBinary(bitmapMask);
+    let binary = this.arrayBufferToBinary(this.canvasToBitmap(canvas));
+    binary += this.Uint8ArrayToBinary(bitmapMask);
     return binary;
   }
 
-  function canvasToBitmap(canvas) {
+  canvasToBitmap(canvas) {
     const ctx = canvas.getContext("2d");
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const rgbaData8 = imageData.data;
@@ -146,16 +97,16 @@ function faviconjs(options) {
     return bgraData32Rotated.buffer;
   }
 
-  function createIconDirectoryHeader(numImages) {
+  createIconDirectoryHeader(numImages) {
     const buffer = new ArrayBuffer(6);
     const view = new DataView(buffer);
     view.setUint16(0, 0, true); // Reserved. Must always be 0.
     view.setUint16(2, 1, true); // Specifies type. 1 = ICO.
     view.setUint16(4, numImages, true); // Number of images.
-    return arrayBufferToBinary(buffer);
+    return this.arrayBufferToBinary(buffer);
   }
 
-  function createIconDirectoryEntry(width, height, size, offset) {
+  createIconDirectoryEntry(width, height, size, offset) {
     const buffer = new ArrayBuffer(16);
     const view = new DataView(buffer);
     view.setUint8(0, width); // Pixel width (0..256). 0 = 256 pixels.
@@ -166,10 +117,10 @@ function faviconjs(options) {
     view.setUint16(6, 32, true); // Specifies bits per pixel.
     view.setUint32(8, size, true); // Image size (bytes).
     view.setUint32(12, offset, true); // Offset to BMP of PNG.
-    return arrayBufferToBinary(buffer);
+    return this.arrayBufferToBinary(buffer);
   }
 
-  function createBitmapInfoHeader(width, height) {
+  createBitmapInfoHeader(width, height) {
     const buffer = new ArrayBuffer(40);
     const view = new DataView(buffer);
     view.setUint32(0, 40, true); // Header size (40 bytes).
@@ -183,10 +134,10 @@ function faviconjs(options) {
     view.setUint32(28, 0, true); // Vertical resolution.
     view.setUint32(32, 0, true); // Number of colors. 0 = default.
     view.setUint32(36, 0, true); // Number of important colors. 0 =  all
-    return arrayBufferToBinary(buffer);
+    return this.arrayBufferToBinary(buffer);
   }
 
-  function arrayBufferToBinary(buffer) {
+  arrayBufferToBinary(buffer) {
     let binary = "";
     const bytes = new Uint8Array(buffer);
     const len = bytes.byteLength;
@@ -196,7 +147,7 @@ function faviconjs(options) {
     return binary;
   }
 
-  function Uint8ArrayToBinary(Uint8Array) {
+  Uint8ArrayToBinary(Uint8Array) {
     let binary = "";
     const bytes = Uint8Array;
     const len = bytes.byteLength;
