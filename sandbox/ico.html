@@ -28,7 +28,7 @@
       context.fillText("F", x, y);
 
       // Create favicon.ico dataurl
-      var ico = new Favicon.Ico(canvas);
+      const ico = new Favicon.Ico(canvas);
       const dataurl = ico.generate([16, 32, 48]);
 
       // Activate the download button

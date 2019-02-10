@@ -9,7 +9,7 @@ Favicon.js is a lightweight library that allows you to create ICO and PNG format
 Generate an ICO file from a `<canvas>` element. Initialize a `Favicon.Ico` object with a canvas element. The canvas should be square for best results. Pass the generate method an array of sizes that the (layered) ICO file should contain.
 
 ```JavaScript
-var ico = new Favicon.Ico(canvas);
+const ico = new Favicon.Ico(canvas);
 const dataurl = ico.generate([16, 32, 48]);
 ```
 
@@ -18,7 +18,7 @@ const dataurl = ico.generate([16, 32, 48]);
 Generate a PNG file from a `canvas` element. Initialize a `Favicon.Png` object with a canvas element. The canvas should be square for best results. Pass the generate method the size that should be generated.
 
 ```JavaScript
-var png = new Favicon.Png(canvas);
+const png = new Favicon.Png(canvas);
 const dataurl = png.generate(32);
 ```
 
@@ -26,16 +26,18 @@ const dataurl = png.generate(32);
 
 Generate multiple favicon format based on current best practices. Pass `Favicon.Package` a canvas element and it will return a dictionary of dataurls.
 
+```JavaScript
+var package = Favicon.Package(canvas);
+```
+
+The package will contain the follow keys which map to common favicon formats.
+
 - `ico` - favicon.ico
 - `png16` - favicon-16x16.png
 - `png32` - favicon-32x32.png
 - `png180` - apple-touch-icon.png
 - `png192` - android-chrome-192x192.png
 - `png512` - android-chrome-512x512.png
-
-```JavaScript
-var package = Favicon.Package(canvas);
-```
 
 ### Example
 
@@ -64,7 +66,7 @@ const y = canvas.height / 2;
 context.fillText("F", x, y);
 
 // Create favicon.ico dataurl
-var ico = new Favicon.Ico(canvas);
+const ico = new Favicon.Ico(canvas);
 const dataurl = ico.generate([16, 32, 48]);
 
 // Activate the download button

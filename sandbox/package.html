@@ -89,7 +89,7 @@
         context.fillText("J", x, y);
 
         // Generate package
-        var package = Favicon.Package.generate(canvas);
+        const package = Favicon.Package.generate(canvas);
 
         // Display individual items
         document.getElementById('favicon-ico').src = package.ico;
