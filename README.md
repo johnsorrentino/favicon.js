@@ -1,23 +1,47 @@
 # Favicon.js
 
-Favicon.js is a lightweight library that allows you to create an ICO formatted favicon from a canvas element.
+Favicon.js is a lightweight library that allows you to create ICO and PNG formatted favicons from a canvas element.
 
 ## Usage
 
-The favicon.js library takes two parameters: a canvas element and an array of sizes. The canvas element should include the image data that you want your favicon to contain. The list of sizes defines the dimensions of the images that will be included in the generated ICO file.
+### Generate ICO
+
+Generate an ICO file from a `<canvas>` element. Initialize a `Favicon.Ico` object with a canvas element. The canvas should be square for best results. Pass the generate method an array of sizes that the (layered) ICO file should contain.
 
 ```JavaScript
-const dataurl = faviconjs({
-  canvas: canvas,
-  sizes: [16, 32, 48]
-});
+var ico = new Favicon.Ico(canvas);
+const dataurl = ico.generate([16, 32, 48]);
 ```
 
-## Example
+### Generate PNG
 
-The example below will generate an ICO formatted favicon that includes 3 sizes: 16x16, 32x32, and 48x48 pixels. The full example can be found [here](./examples).
+Generate a PNG file from a `canvas` element. Initialize a `Favicon.Png` object with a canvas element. The canvas should be square for best results. Pass the generate method the size that should be generated.
 
-![Preview](./examples/preview.png)
+```JavaScript
+var png = new Favicon.Png(canvas);
+const dataurl = png.generate(32);
+```
+
+### Generate Package
+
+Generate multiple favicon format based on current best practices. Pass `Favicon.Package` a canvas element and it will return a dictionary of dataurls.
+
+- `ico` - favicon.ico
+- `png16` - favicon-16x16.png
+- `png32` - favicon-32x32.png
+- `png180` - apple-touch-icon.png
+- `png192` - android-chrome-192x192.png
+- `png512` - android-chrome-512x512.png
+
+```JavaScript
+var package = Favicon.Package(canvas);
+```
+
+### Example
+
+The example below will generate an ICO formatted favicon that includes 3 sizes: 16x16, 32x32, and 48x48 pixels. The full example can be found [here](./sandbox/ico.html).
+
+![Preview](./sandbox/preview.png)
 
 ```JavaScript
 // Setup canvas
@@ -40,10 +64,8 @@ const y = canvas.height / 2;
 context.fillText("F", x, y);
 
 // Create favicon.ico dataurl
-const dataurl = faviconjs({
-  canvas: canvas,
-  sizes: [16, 32, 48]
-});
+var ico = new Favicon.Ico(canvas);
+const dataurl = ico.generate([16, 32, 48]);
 
 // Activate the download button
 const download = document.getElementById("download");
