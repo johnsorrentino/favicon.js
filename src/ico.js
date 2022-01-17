@@ -8,7 +8,7 @@ export default class Ico {
   }
 
   generate() {
-    const canvasMaster = Canvas.resizeCanvasOptimal(canvas, 128, 128);
+    const canvasMaster = Canvas.resizeCanvasOptimal(this.canvas, 128, 128);
     const iconDirectoryHeader = this.createIconDirectoryHeader(this.sizes.length);
     let iconDirectoryEntries = "";
     let bitmapData = "";
