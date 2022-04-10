@@ -2,6 +2,13 @@
 
 Favicon.js is a lightweight library that allows you to create ICO and PNG formatted favicons from a canvas element.
 
+## Build
+
+```
+yarn install
+yarn start
+```
+
 ## Usage
 
 ### Generate ICO
