@@ -1,15 +1,12 @@
 {
-  "name": "favicon.js",
+  "name": "@johnsorrentino/favicon.js",
   "version": "1.0.0",
   "description": "Favicon.js is a lightweight library that allows you to create an ICO formatted favicon from a canvas element.",
   "private": true,
-  "directories": {
-    "example": "examples"
-  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "start": "parcel",
+    "build": "parcel build"
   },
   "repository": {
     "type": "git",
@@ -23,7 +20,7 @@
   },
   "homepage": "https://github.com/johnsorrentino/faviconjs#readme",
   "devDependencies": {
-    "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3"
-  }
+    "parcel": "latest"
+  },
+  "source": "src/index.js"
 }
