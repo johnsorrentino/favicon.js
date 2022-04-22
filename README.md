@@ -6,7 +6,7 @@ Favicon.js is a lightweight library that allows you to create ICO and PNG format
 
 ```
 yarn install
-yarn start
+yarn build
 ```
 
 ## Usage
@@ -16,8 +16,8 @@ yarn start
 Generate an ICO file from a `<canvas>` element. Initialize a `Favicon.Ico` object with a canvas element. The canvas should be square for best results. Pass the generate method an array of sizes that the (layered) ICO file should contain.
 
 ```JavaScript
-const ico = new Favicon.Ico(canvas);
-const dataurl = ico.generate([16, 32, 48]);
+const favicon = new FaviconJS(canvas);
+const dataurl = favicon.ico([16, 32, 48]);
 ```
 
 ### Generate PNG
@@ -25,19 +25,20 @@ const dataurl = ico.generate([16, 32, 48]);
 Generate a PNG file from a `canvas` element. Initialize a `Favicon.Png` object with a canvas element. The canvas should be square for best results. Pass the generate method the size that should be generated.
 
 ```JavaScript
-const png = new Favicon.Png(canvas);
-const dataurl = png.generate(32);
+const favicon = new FaviconJS(canvas);
+const dataurl = favicon.png(32);
 ```
 
-### Generate Package
+### Generate Bundle
 
-Generate multiple favicon format based on current best practices. Pass `Favicon.Package` a canvas element and it will return a dictionary of dataurls.
+Generate multiple favicon format based on current best practices.
 
 ```JavaScript
-var package = Favicon.Package(canvas);
+const favicon = new FaviconJS(canvas);
+const package = favicon.bundle();
 ```
 
-The package will contain the follow keys which map to common favicon formats.
+The bundle will contain the follow keys which map to common favicon formats.
 
 - `ico` - favicon.ico
 - `png16` - favicon-16x16.png
@@ -73,8 +74,8 @@ const y = canvas.height / 2;
 context.fillText("F", x, y);
 
 // Create favicon.ico dataurl
-const ico = new Favicon.Ico(canvas);
-const dataurl = ico.generate([16, 32, 48]);
+const favicon = new FaviconJS(canvas);
+const dataurl = favicon.ico([16, 32, 48]);
 
 // Activate the download button
 const download = document.getElementById("download");

@@ -1,7 +1,6 @@
 import Canvas from "./canvas.js";
 
 export default class Ico {
-
   constructor(canvas, sizes = [16, 32, 48]) {
     this.canvas = canvas;
     this.sizes = sizes;
@@ -9,7 +8,9 @@ export default class Ico {
 
   generate() {
     const canvasMaster = Canvas.resizeCanvasOptimal(this.canvas, 128, 128);
-    const iconDirectoryHeader = this.createIconDirectoryHeader(this.sizes.length);
+    const iconDirectoryHeader = this.createIconDirectoryHeader(
+      this.sizes.length
+    );
     let iconDirectoryEntries = "";
     let bitmapData = "";
 

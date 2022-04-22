@@ -6,8 +6,9 @@
   <body>
     <canvas id="canvas"></canvas>
     <a id="download">Download</a>
-    <script src="../dist/index.js"></script>
-    <script>
+    <script type="module">
+      import FaviconJS from "../dist/favicon.mjs";
+
       // Setup canvas
       const canvas = document.getElementById("canvas");
       canvas.width = 128;
@@ -28,8 +29,8 @@
       context.fillText("F", x, y);
 
       // Create favicon.ico dataurl
-      const ico = new Favicon.Ico(canvas);
-      const dataurl = ico.generate([16, 32, 48]);
+      const favicon = new FaviconJS(canvas);
+      const dataurl = favicon.ico([16, 32, 48]);
 
       // Activate the download button
       const download = document.getElementById("download");
