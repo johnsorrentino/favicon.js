@@ -1,26 +1,32 @@
 {
   "name": "@johnsorrentino/favicon.js",
-  "version": "1.0.0",
   "description": "Favicon.js is a lightweight library that allows you to create an ICO formatted favicon from a canvas element.",
-  "private": true,
+  "version": "1.0.0",
+  "author": "",
   "browserslist": "> 0.5%, last 2 versions, not dead",
-  "scripts": {
-    "start": "parcel",
-    "build": "parcel build"
+  "bugs": {
+    "url": "https://github.com/johnsorrentino/faviconjs/issues"
   },
+  "dependencies": {
+    "@swc/helpers": "^0.3.8"
+  },
+  "devDependencies": {
+    "parcel": "latest"
+  },
+  "homepage": "https://github.com/johnsorrentino/faviconjs#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "dist/favicon.js",
+  "module": "dist/favicon.mjs",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johnsorrentino/faviconjs.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/johnsorrentino/faviconjs/issues"
+  "scripts": {
+    "build": "parcel build",
+    "start": "parcel",
+    "watch": "parcel watch"
   },
-  "homepage": "https://github.com/johnsorrentino/faviconjs#readme",
-  "devDependencies": {
-    "parcel": "latest"
-  },
-  "source": "src/index.js"
+  "source": "src/favicon.js"
 }

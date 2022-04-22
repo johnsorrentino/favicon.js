@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <td>android-chrome-512x512.png</td>
-          <td>192x192</td>
+          <td>512x512</td>
           <td>
             <img id="android-chrome-512x512-png"></img>
           </td>
@@ -66,8 +66,9 @@
         </tr>
       </tbody>
     </table>
-    <script src="../dist/index.js"></script>
-    <script>
+    <script type="module">
+      import FaviconJS from "../dist/favicon.mjs";
+
       document.addEventListener("DOMContentLoaded", function(event) {
         // Setup canvas
         const canvas = document.getElementById("canvas");
@@ -89,15 +90,16 @@
         context.fillText("J", x, y);
 
         // Generate package
-        const package = Favicon.Package.generate(canvas);
+        const favicon = new FaviconJS(canvas)
+        const bundle = favicon.bundle();
 
         // Display individual items
-        document.getElementById('favicon-ico').src = package.ico;
-        document.getElementById('android-chrome-192x192-png').src = package.png192;
-        document.getElementById('android-chrome-512x512-png').src = package.png512;
-        document.getElementById('apple-touch-icon-png').src = package.png180;
-        document.getElementById('favicon-16x16-png').src = package.png16;
-        document.getElementById('favicon-32x32-png').src = package.png32;
+        document.getElementById('favicon-ico').src = bundle.ico;
+        document.getElementById('android-chrome-192x192-png').src = bundle.png192;
+        document.getElementById('android-chrome-512x512-png').src = bundle.png512;
+        document.getElementById('apple-touch-icon-png').src = bundle.png180;
+        document.getElementById('favicon-16x16-png').src = bundle.png16;
+        document.getElementById('favicon-32x32-png').src = bundle.png32;
       });
     </script>
   </body>

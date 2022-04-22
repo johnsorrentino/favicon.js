@@ -13,12 +13,20 @@ Canvas.resizeCanvasOptimal = (canvas, targetWidth, targetHeight) => {
   while (currentWidth / 2 >= targetWidth) {
     currentWidth = currentWidth / 2;
     currentHeight = currentHeight / 2;
-    resizedCanvas = Canvas.resizeCanvas(currentCanvas, currentWidth, currentHeight);
+    resizedCanvas = Canvas.resizeCanvas(
+      currentCanvas,
+      currentWidth,
+      currentHeight
+    );
     currentCanvas = resizedCanvas;
   }
 
   if (currentWidth > targetWidth) {
-    resizedCanvas = Canvas.resizeCanvas(currentCanvas, targetWidth, targetHeight);
+    resizedCanvas = Canvas.resizeCanvas(
+      currentCanvas,
+      targetWidth,
+      targetHeight
+    );
     currentCanvas = resizedCanvas;
   }
 
