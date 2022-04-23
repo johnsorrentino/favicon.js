@@ -1,4 +1,4 @@
-import Canvas from "./canvas";
+import Resize from "./resize";
 
 export default class Png {
   constructor(canvas) {
@@ -6,7 +6,6 @@ export default class Png {
   }
 
   generate(size) {
-    var resizedCanvas = Canvas.resizeCanvasOptimal(this.canvas, size, size);
-    return resizedCanvas.toDataURL();
+    return new Resize(this.canvas).generate(size, size).toDataURL();
   }
 }

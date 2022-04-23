@@ -1,22 +1,19 @@
-import Canvas from "./canvas.js";
+import Resize from "./resize.js";
 
-export default class Ico {
-  constructor(canvas, sizes = [16, 32, 48]) {
+class Ico {
+  constructor(canvas) {
     this.canvas = canvas;
-    this.sizes = sizes;
   }
 
-  generate() {
-    const canvasMaster = Canvas.resizeCanvasOptimal(this.canvas, 128, 128);
-    const iconDirectoryHeader = this.createIconDirectoryHeader(
-      this.sizes.length
-    );
+  generate(sizes = [16, 32, 48]) {
+    const canvasMaster = new Resize(this.canvas).generate(128, 128);
+    const iconDirectoryHeader = this.createIconDirectoryHeader(sizes.length);
     let iconDirectoryEntries = "";
     let bitmapData = "";
 
-    for (let i = 0; i < this.sizes.length; i++) {
-      const size = this.sizes[i];
-      const canvas = Canvas.resizeCanvasOptimal(canvasMaster, size, size);
+    for (let i = 0; i < sizes.length; i++) {
+      const size = sizes[i];
+      const canvas = new Resize(canvasMaster).generate(size, size);
       const context = canvas.getContext("2d");
       const width = canvas.width;
       const height = canvas.height;
@@ -24,7 +21,7 @@ export default class Ico {
       const bitmapInfoHeader = this.createBitmapInfoHeader(width, height);
       const bitmapImageData = this.createBitmapImageData(canvas);
       const bitmapSize = bitmapInfoHeader.length + bitmapImageData.length;
-      const bitmapOffset = this.calculateBitmapOffset(this.sizes, i);
+      const bitmapOffset = this.calculateBitmapOffset(sizes, i);
       iconDirectoryEntries += this.createIconDirectoryEntry(
         width,
         height,
@@ -158,3 +155,5 @@ export default class Ico {
     return binary;
   }
 }
+
+export default Ico;

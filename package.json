@@ -1,7 +1,7 @@
 {
   "name": "@johnsorrentino/favicon.js",
   "description": "Favicon.js is a lightweight library that allows you to create an ICO formatted favicon from a canvas element.",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "bugs": {
@@ -14,7 +14,17 @@
     "parcel": "latest"
   },
   "homepage": "https://github.com/johnsorrentino/faviconjs#readme",
-  "keywords": [],
+  "keywords": [
+    "bookmark icon",
+    "favicon",
+    "favorite icon",
+    "ico",
+    "icon",
+    "shortcut icon",
+    "tab icon",
+    "url icon",
+    "website icon"
+  ],
   "license": "MIT",
   "main": "dist/favicon.js",
   "module": "dist/favicon.mjs",
