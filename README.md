@@ -49,9 +49,9 @@ The bundle will contain the follow keys which map to common favicon formats.
 
 ### Example
 
-The example below will generate an ICO formatted favicon that includes 3 sizes: 16x16, 32x32, and 48x48 pixels. The full example can be found [here](./sandbox/ico.html).
+The example below will generate an ICO formatted favicon that includes 3 sizes: 16x16, 32x32, and 48x48 pixels. The full example can be found [here](./examples/ico.html).
 
-![Preview](./examples/preview.png)
+![Preview](./preview.png)
 
 ```JavaScript
 // Setup canvas
