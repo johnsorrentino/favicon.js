@@ -2,14 +2,12 @@
 
 Favicon.js is a lightweight library that allows you to create ICO and PNG formatted favicons from a canvas element.
 
-## Build
+## Examples
 
 ```
 yarn install
-yarn build
+yarn examples
 ```
-
-## Usage
 
 ### Generate ICO
 
@@ -51,7 +49,7 @@ The bundle will contain the follow keys which map to common favicon formats.
 
 The example below will generate an ICO formatted favicon that includes 3 sizes: 16x16, 32x32, and 48x48 pixels. The full example can be found [here](./examples/ico.html).
 
-![Preview](./preview.png)
+![Preview](./examples/preview.png)
 
 ```JavaScript
 // Setup canvas
