@@ -1,11 +1,11 @@
 {
-  "name": "@johnsorrentino/guitartuner.js",
-  "description": "guitartuner.js is a lightweight library that leverages your microphone to help tune your guitar.",
+  "name": "@johnsorrentino/favicon.js",
+  "description": "Favicon.js is a lightweight library that allows you to create an ICO formatted favicon from a canvas element.",
   "version": "0.0.1",
   "author": "johnsorrentino",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "bugs": {
-    "url": "https://github.com/johnsorrentino/guitartunerjs/issues"
+    "url": "https://github.com/johnsorrentino/faviconjs/issues"
   },
   "dependencies": {
     "@swc/helpers": "^0.3.8"
@@ -13,19 +13,29 @@
   "devDependencies": {
     "parcel": "latest"
   },
-  "homepage": "https://github.com/johnsorrentino/guitartunerjs#readme",
-  "keywords": [],
+  "homepage": "https://github.com/johnsorrentino/faviconjs#readme",
+  "keywords": [
+    "bookmark icon",
+    "favicon",
+    "favorite icon",
+    "ico",
+    "icon",
+    "shortcut icon",
+    "tab icon",
+    "url icon",
+    "website icon"
+  ],
   "license": "MIT",
-  "main": "dist/guitartuner.js",
-  "module": "dist/guitartuner.mjs",
+  "main": "dist/favicon.js",
+  "module": "dist/favicon.mjs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnsorrentino/guitartunerjs.git"
+    "url": "git+https://github.com/johnsorrentino/faviconjs.git"
   },
   "scripts": {
     "build": "parcel build",
-    "demo": "parcel demo/index.html",
+    "examples": "parcel examples/index.html",
     "watch": "parcel watch"
   },
-  "source": "src/guitartuner.js"
+  "source": "src/favicon.js"
 }
